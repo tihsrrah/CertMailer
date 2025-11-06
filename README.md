@@ -1,94 +1,65 @@
 # CertMailer
-A local python script for automated mailing of certificates
-Certificate Generator & Mailer
+A simple Python GUI tool to automatically generate participation
+certificates and send them via email.
 
-A simple Python GUI tool to automatically generate participation certificates and email them to participants.
-Created for college events, fests, and societies that need to send certificates to many people quickly.
+## Features
 
-What this tool does
+-   Load a certificate template (PNG/JPG)
+-   Read participant list (Excel/CSV)
+-   Print participant names in Poppins Bold
+-   Add unique security codes like `quiz-25-010`
+-   Save certificates as PDFs
+-   Optional Gmail-based auto‑mailing
+-   Live progress log
 
-Lets you load a certificate template (JPG/PNG)
+## How to Use
 
-Reads a participant list (Excel or CSV) with names & emails
+1.  Run:
 
-Prints each participant’s name on the certificate in Poppins Bold
+        python cert_mailer.py
 
-Adds a unique security code like quiz-25-010
+2.  In the GUI:
 
-Saves certificates as PDFs
+    -   Select certificate template
+    -   Select participant Excel/CSV
+    -   Select Poppins-Bold.ttf & Arial.ttf
+    -   Choose output folder
 
-Can optionally email each certificate through Gmail
+3.  Enter:
 
-Shows a live progress log for every step
+    -   Event code (e.g., quiz)
+    -   Year (e.g., 25)
+    -   Sender Gmail ID & password
 
-How to use it
+4.  Choose:
 
-Run the Python script:
+    -   Generate certificates only\
+    -   Generate & send certificates
 
-python cert_mailer.py
+## Participant File Format
 
+  Name   Email
+  ------ -------
 
-Use the GUI to select:
+Row number becomes the serial for the security code.
 
-Certificate template image
+## Security Code Format
 
-Participant list
-
-Poppins-Bold.ttf and Arial.ttf
-
-Output folder
-
-Enter:
-
-Event code (e.g., quiz)
-
-Year (e.g., 25)
-
-Sender Gmail ID & password
-
-Choose:
-
-Generate Certificates Only
-
-Generate & Send Certificates
-
-Sit back. The certificates will be created (and emailed if you selected that option).
-
-Participant file format
-
-Your Excel/CSV needs only:
-
-Name	Email
-
-The row number decides the serial number for the security code.
-
-Security code format
-
-Each certificate gets a verification code:
-
-<eventcode>-<year>-<serial>
-
+    <eventcode>-<year>-<serial>
 
 Example:
 
-quiz-25-010
+    quiz-25-010
+
+## Requirements
+
+    pip install pillow pandas openpyxl
 
 
-Printed bottom-left in small light-gray Arial text.
 
-Requirements
+## Notes
 
-Install these Python packages:
+-   Works with any template as long as resolution stays same.
+-   Gmail password not saved.
+-   Recommended: use a separate Gmail account for sending.
 
-pip install pillow pandas openpyxl
-
-Converting to EXE (optional)
-pyinstaller --onefile --noconsole cert_mailer.py
-
-Notes
-
-This tool works with any certificate design as long as the template resolution stays the same.
-
-Gmail password is used only for sending – it’s not saved anywhere.
-
-Best practice: use a separate Gmail account for certificate sending.
