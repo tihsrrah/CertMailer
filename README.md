@@ -29,7 +29,7 @@ certificates and send them via email.
 
     -   Event code (e.g., quiz)
     -   Year (e.g., 25)
-    -   Sender Gmail ID & password
+    -   Sender Gmail ID, Email subject and app password
 
 4.  Choose:
 
@@ -60,6 +60,7 @@ Example:
 ## Notes
 
 -   Works with any template as long as resolution stays same.
+-   Black underline bar is needed to recognise where the name goes.
 -   Gmail password not saved.
 -   Recommended: use a separate Gmail account for sending.
 
