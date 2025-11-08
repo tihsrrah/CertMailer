@@ -391,16 +391,30 @@ class CertificateApp(tk.Tk):
         # Section 4: Email / SMTP
         s4 = ttk.LabelFrame(frm, text="4) Sending (Gmail recommended - use App Password)", padding=8)
         s4.pack(fill='x', pady=6)
+
+        # Sender Email
         ttk.Label(s4, text="Sender Email:").grid(row=0, column=0, sticky='w')
         self.sender_var = tk.StringVar()
         ttk.Entry(s4, textvariable=self.sender_var, width=36).grid(row=0, column=1, sticky='w')
-        ttk.Label(s4, text="App Password:").grid(row=1, column=0, sticky='w', pady=6)
+
+        # Email Subject (new field)
+        ttk.Label(s4, text="Email Subject:").grid(row=1, column=0, sticky='w', pady=6)
+        self.subject_var = tk.StringVar(value="Here's your Certificate of Participation!")
+        ttk.Entry(s4, textvariable=self.subject_var, width=36).grid(row=1, column=1, sticky='w')
+
+        # App Password
+        ttk.Label(s4, text="App Password:").grid(row=2, column=0, sticky='w', pady=6)
         self.password_var = tk.StringVar()
-        ttk.Entry(s4, textvariable=self.password_var, show="*", width=36).grid(row=1, column=1, sticky='w')
-        ttk.Label(s4, text="SMTP Server:").grid(row=2, column=0, sticky='w')
-        ttk.Entry(s4, textvariable=self.smtp_server_var, width=36).grid(row=2, column=1, sticky='w')
-        ttk.Label(s4, text="Port:").grid(row=3, column=0, sticky='w', pady=6)
-        ttk.Entry(s4, textvariable=self.smtp_port_var, width=36).grid(row=3, column=1, sticky='w')
+        ttk.Entry(s4, textvariable=self.password_var, show="*", width=36).grid(row=2, column=1, sticky='w')
+
+        # SMTP Server
+        ttk.Label(s4, text="SMTP Server:").grid(row=3, column=0, sticky='w')
+        ttk.Entry(s4, textvariable=self.smtp_server_var, width=36).grid(row=3, column=1, sticky='w')
+
+        # Port
+        ttk.Label(s4, text="Port:").grid(row=4, column=0, sticky='w', pady=6)
+        ttk.Entry(s4, textvariable=self.smtp_port_var, width=36).grid(row=4, column=1, sticky='w')
+
 
         # Buttons (Preview / Generate / Send)
         btn_frame = ttk.Frame(frm)
@@ -615,7 +629,10 @@ class CertificateApp(tk.Tk):
         password = self.password_var.get().strip()
         smtp_server = self.smtp_server_var.get().strip()
         smtp_port = int(self.smtp_port_var.get())
-        subject = "Here's your Certificate of Participation from Quizzinga!"
+        subject = self.subject_var.get().strip()
+        if not subject:
+            subject = "Your Certificate is here"
+
 
         self.log(f"Starting certificate generation and sending to {total} participants...")
         success = 0
